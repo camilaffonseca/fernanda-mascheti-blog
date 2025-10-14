@@ -1,39 +1,25 @@
 @import "tailwindcss";
 
-:root {
-  --color-background: #ffffff;
-  --color-primary: "#1ca7c8";
-  --color-text-heading: "#284260";
-  --color-text-paragraph: "#6e859f";
-}
-
 @theme inline {
   --font-heading: var(--font-chakra-petch);
   --font-paragraph: var(--font-inter);
-}
 
-/* ? Verificar se é viável fazer o modo dark dessa forma (só substituindo as cores), ou se eu faço da forma que o tailwind propõe mesmo */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #ffffff;
-    --color-primary: "#1ca7c8";
-    --color-text-heading: "#284260";
-    --color-text-paragraph: "#6e859f";
-  }
-} */
+  --color-bg: #ffffff;
+  --color-primary: #1ca7c8;
+  --color-heading: #284260;
+  --color-paragraph: #6e859f;
+}
 
 @layer components {
   .heading {
-    @apply font-bold font-heading;
+    @apply font-bold font-heading text-heading;
   }
 
   .paragraph {
-    @apply font-normal font-paragraph;
+    @apply font-normal font-paragraph text-paragraph;
   }
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-text-paragraph);
-  font-family: var(--font-paragraph), sans-serif;
+  @apply bg-bg text-paragraph
 }

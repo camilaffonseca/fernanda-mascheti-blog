@@ -20,15 +20,15 @@ export const metadata: Metadata = {
     "Case técnico proposto pela Alura para a função de Desenvolvedor Frontend",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
-    <html lang="en" className="py-10 px-30">
+    <html lang="pt-BR" className="py-10 px-30">
       <body className={`${chakraPetch.variable} ${inter.variable} antialiased`}>
-        <header className="flex justify-between font-heading py-8 text-2xl font-bold">
+        <header className="flex justify-between py-8 text-2xl heading">
           <p className="uppercase">Fernanda Mascheti</p>
           <div className="flex gap-8">
             <button type="button">Início</button>
@@ -40,21 +40,23 @@ export default function RootLayout({
 
         <footer>
           <div className="flex justify-between">
-            <div>
-              <p className="heading">Vamos conversar?</p>
-              <p>Entre em contato</p>
+            <div className="flex-col gap-3">
+              <p className="heading text-primary">Vamos conversar?</p>
+              <p className="heading text-6xl">Entre em contato</p>
             </div>
-            <div>
+            <div className="flex-col gap-3">
               <p>fernandamascheti@gmail.com</p>
               <p>/Fernanda Mascheti</p>
               <p>/fernandamascheti</p>
             </div>
           </div>
-          <p className="w-full text-center">
+          <p className="w-full text-center paragraph mt-16">
             © Copyright 2025. Produzido por Fernanda Mascheti
           </p>
         </footer>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
