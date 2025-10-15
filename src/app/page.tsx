@@ -1,6 +1,11 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Image from "next/image";
+import { usePosts } from "@/services/usePosts";
+
+const Home = () => {
+  const { data } = usePosts();
+
   return (
     <main className="flex flex-col justify-center items-center">
       <section className="w-full flex flex-col gap-6 items-center mt-16 relative">
@@ -37,6 +42,12 @@ export default function Home() {
         </p>
       </section>
 
+      <section>
+        {data?.map((post) => (
+          <p key={post.id}>{post.author}</p>
+        ))}
+      </section>
+
       <section className="flex w-full justify-between mt-32">
         <div className="flex-col gap-3">
           <p className="heading text-primary">Vamos conversar?</p>
@@ -50,4 +61,6 @@ export default function Home() {
       </section>
     </main>
   );
-}
+};
+
+export default Home;
