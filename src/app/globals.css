@@ -3,12 +3,15 @@
 @theme inline {
   --font-heading: var(--font-chakra-petch);
   --font-paragraph: var(--font-inter);
-
-  --color-bg: #ffffff;
+  
   --color-primary: #1ca7c8;
   --color-secondary: #8C61D5;
+  
+  --color-bg: #ffffff;
   --color-heading: #284260;
   --color-paragraph: #6e859f;
+
+  --color-pink: #DB73FF;
 }
 
 @layer components {
