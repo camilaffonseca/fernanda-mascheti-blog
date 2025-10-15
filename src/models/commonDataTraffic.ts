@@ -14,3 +14,8 @@ export type Pagination = {
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 };
+
+export type PaginationQueryParams = {
+  page?: number;
+  limit?: number;
+};
