@@ -26,17 +26,27 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="pt-BR" className="py-10 px-30">
-      <body className={`${chakraPetch.variable} ${inter.variable} antialiased`}>
+    <html lang="pt-BR">
+      <body
+        className={`${chakraPetch.variable} ${inter.variable} antialiased py-2 px-6 sm:py-10 sm:px-30`}
+      >
         <header className="flex justify-between py-8 text-2xl heading">
-          <p className="uppercase">Fernanda Mascheti</p>
-          <div className="flex gap-8">
-            <button type="button">Início</button>
-            <button type="button">Blog</button>
-          </div>
+          <h1 className="uppercase">Fernanda Mascheti</h1>
+
+          <nav aria-label="Menu">
+            <ul className="flex gap-8">
+              <li>
+                <a href="/">Início</a>
+              </li>
+
+              <li>
+                <a href="#blog">Blog</a>
+              </li>
+            </ul>
+          </nav>
         </header>
 
-        {children}
+        <main>{children}</main>
 
         <footer>
           <p className="w-full text-center paragraph mt-16">
