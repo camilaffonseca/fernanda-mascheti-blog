@@ -36,20 +36,9 @@ const RootLayout = ({
           </div>
         </header>
 
-        <main>{children}</main>
+        {children}
 
         <footer>
-          <div className="flex justify-between">
-            <div className="flex-col gap-3">
-              <p className="heading text-primary">Vamos conversar?</p>
-              <p className="heading text-6xl">Entre em contato</p>
-            </div>
-            <div className="flex-col gap-3">
-              <p>fernandamascheti@gmail.com</p>
-              <p>/Fernanda Mascheti</p>
-              <p>/fernandamascheti</p>
-            </div>
-          </div>
           <p className="w-full text-center paragraph mt-16">
             © Copyright 2025. Produzido por Fernanda Mascheti
           </p>
