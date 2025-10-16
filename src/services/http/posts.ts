@@ -25,3 +25,14 @@ export const getPosts = async (params?: PaginationQueryParams) =>
 
 export const getPostById = async ({ postId }: { postId: string }) =>
   api.get<PostByIdResponse>(`/posts/id/${postId}`);
+
+export const getPostsByCategory = async ({
+  category,
+  params,
+}: {
+  category: string;
+  params?: PaginationQueryParams;
+}) =>
+  api.get<PostsResponse>(`/posts/category/${category}`, {
+    params,
+  });

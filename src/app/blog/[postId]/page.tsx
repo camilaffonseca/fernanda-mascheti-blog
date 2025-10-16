@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import Badge from "@/components/generic/Badge";
 import PostCard from "@/components/generic/PostCard";
 import { usePostById } from "@/services/hooks/usePostById";
-import { usePosts } from "@/services/hooks/usePosts";
+import { usePostsByCategory } from "@/services/hooks/usePostsByCategory";
 
 const Page = () => {
   const params = useParams();
@@ -15,9 +15,11 @@ const Page = () => {
 
   const { data } = usePostById(id);
 
-  const relatedPosts = usePosts();
-
   const post = data?.post;
+
+  const relatedPosts = usePostsByCategory(post?.category?.slug as string, {
+    limit: 3,
+  });
 
   //TODO: tratamentos de erro e loading
   if (!post) {
@@ -68,15 +70,17 @@ const Page = () => {
 
         <p className="mt-16">{post.content}</p>
       </section>
-      <section>
-        <p className="heading text-2xl my-10">Postagens relacionadas</p>
+      {relatedPosts.data?.posts ? (
+        <section>
+          <p className="heading text-2xl my-10">Postagens relacionadas</p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full gap-6 max-w-7xl">
-          {relatedPosts.data?.posts?.map((post) => (
-            <PostCard post={post} key={post.id} />
-          ))}
-        </div>
-      </section>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full gap-6 max-w-7xl">
+            {relatedPosts.data?.posts?.map((post) => (
+              <PostCard post={post} key={post.id} />
+            ))}
+          </div>
+        </section>
+      ) : null}
     </>
   );
 };
