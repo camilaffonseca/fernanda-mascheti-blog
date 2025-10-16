@@ -23,7 +23,7 @@ export const getPosts = async (
   params?: PaginationQueryParams & {
     // TODO? Não funciona pois não existe documentação da api para enviar a pesquisa
     search?: string;
-  }
+  },
 ) =>
   api.get<PostsResponse>("/posts", {
     params,

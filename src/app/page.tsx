@@ -5,7 +5,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import Skeleton from "react-loading-skeleton";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { toast } from "react-toastify";
 
 import Badge from "@/components/generic/Badge";
@@ -204,12 +204,14 @@ const Home = () => {
             aria-live="polite"
             aria-busy={isLoading ? "true" : "false"}
           >
-            <Skeleton height="30rem" />
-            <Skeleton height="30rem" />
-            <Skeleton height="30rem" />
-            <Skeleton height="30rem" />
-            <Skeleton height="30rem" />
-            <Skeleton height="30rem" />
+            <SkeletonTheme baseColor="#6e90b5" highlightColor="#7ba0c7">
+              <Skeleton height="30rem" className="opacity-30" />
+              <Skeleton height="30rem" className="opacity-30" />
+              <Skeleton height="30rem" className="opacity-30" />
+              <Skeleton height="30rem" className="opacity-30" />
+              <Skeleton height="30rem" className="opacity-30" />
+              <Skeleton height="30rem" className="opacity-30" />
+            </SkeletonTheme>
           </ul>
         ) : null}
 

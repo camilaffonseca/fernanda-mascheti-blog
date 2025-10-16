@@ -13,7 +13,7 @@ export const usePosts = (
     // TODO? Não funciona pois não existe documentação da api para enviar a pesquisa
     search?: string;
   },
-  options: SWRConfiguration = {}
+  options: SWRConfiguration = {},
 ) => {
   const { data, isLoading, error } = useSWR(
     ["posts", JSON.stringify(params)],
@@ -31,12 +31,12 @@ export const usePosts = (
       onError() {
         toast.error(
           `Houve um erro ao tentar obter os posts. Tente novamente.`,
-          { closeButton: false }
+          { closeButton: false },
         );
       },
 
       ...options,
-    }
+    },
   );
 
   return {
