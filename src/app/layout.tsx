@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 import Footer from "@/components/templates/Footer";
 import Header from "@/components/templates/Header";
 
 import "./globals.css";
+import "react-loading-skeleton/dist/skeleton.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Chakra_Petch, Inter } from "next/font/google";
 
@@ -25,6 +28,10 @@ export const metadata: Metadata = {
     "Case técnico proposto pela Alura para a função de Desenvolvedor Frontend",
 };
 
+const ToastContainer = dynamic(
+  () => import("@/components/core/ToastContainer"),
+);
+
 const RootLayout = ({
   children,
 }: Readonly<{
@@ -40,6 +47,8 @@ const RootLayout = ({
         <main>{children}</main>
 
         <Footer />
+
+        <ToastContainer />
       </body>
     </html>
   );
