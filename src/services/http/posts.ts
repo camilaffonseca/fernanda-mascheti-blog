@@ -13,7 +13,15 @@ type PostsResponse = {
   meta?: Metadata;
 };
 
+type PostByIdResponse = {
+  post: PostModel;
+  meta: Omit<Metadata, "category">;
+};
+
 export const getPosts = async (params?: PaginationQueryParams) =>
   api.get<PostsResponse>("/posts", {
     params,
   });
+
+export const getPostById = async ({ postId }: { postId: string }) =>
+  api.get<PostByIdResponse>(`/posts/id/${postId}`);
