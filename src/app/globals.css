@@ -22,6 +22,14 @@
   .paragraph {
     @apply font-normal font-paragraph text-paragraph;
   }
+
+  .solid {
+    @apply bg-primary text-bg;
+  }
+
+  .outlined {
+    @apply bg-bg text-primary border-2 border-primary box-border;
+  }
 }
 
 body {

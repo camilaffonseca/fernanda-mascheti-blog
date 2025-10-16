@@ -2,13 +2,20 @@
 
 import Image from "next/image";
 
+import Badge from "@/components/generic/Badge";
 import PostCard from "@/components/generic/PostCard";
 import Divider1 from "@/components/icons/Divider1";
 import Divider2 from "@/components/icons/Divider2";
+import { categories } from "@/constants/categories";
 import { usePosts } from "@/services/hooks/usePosts";
 
 const Home = () => {
   const { data } = usePosts();
+
+  //TODO: tratamentos de erro e loading
+  if (!data) {
+    return null;
+  }
 
   return (
     <>
@@ -86,9 +93,10 @@ const Home = () => {
           </div>
           <div className="flex items-center gap-4">
             <p className="font-bold">Categorias:</p>
-            <p className="bg-primary text-bg font-bold rounded-[4px] py-2 px-3">
-              categoria
-            </p>
+
+            {Object.entries(categories).map((category) => (
+              <Badge key={category[0]} badgeText={category[1]} />
+            ))}
           </div>
         </div>
 
