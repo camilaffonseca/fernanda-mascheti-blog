@@ -1,6 +1,10 @@
 "use client";
 
 import Image from "next/image";
+
+import PostCard from "@/components/generic/PostCard";
+import Divider1 from "@/components/icons/Divider1";
+import Divider2 from "@/components/icons/Divider2";
 import { usePosts } from "@/services/hooks/usePosts";
 
 const Home = () => {
@@ -18,18 +22,18 @@ const Home = () => {
         <div
           aria-hidden
           role="presentation"
-          className="absolute top-30 left-40 w-xl h-full rounded-full bg-pink/30 blur-[150px] z-0 pointer-events-none"
+          className="absolute top-30 left-40 w-1/2 h-full rounded-full bg-pink/30 blur-[150px] z-0 pointer-events-none"
         />
         <div
           aria-hidden
           role="presentation"
-          className="absolute bottom-20 right-10 w-xl h-80 rounded-full bg-primary/20 blur-[200px] z-0 pointer-events-none"
+          className="absolute bottom-20 right-10 w-1/2 h-80 rounded-full bg-primary/20 blur-[200px] z-0 pointer-events-none"
         />
 
         <figure className="z-10 text-center flex flex-col items-center">
           <div
             className="relative overflow-hidden rounded-full border-2 border-primary
-             w-[clamp(128px,20vw,224px)] aspect-square z-10"
+             w-[clamp(160px,20vw,224px)] aspect-square z-10"
           >
             <Image
               src="/images/author-image.webp"
@@ -46,7 +50,10 @@ const Home = () => {
           </figcaption>
         </figure>
 
-        <h2 id="section-heading" className="heading text-6xl text-center z-10">
+        <h2
+          id="section-heading"
+          className="heading text-4xl md:text-5xl lg:text-6xl text-center z-10"
+        >
           Eu ensino{" "}
           <span className="bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
             Programação
@@ -61,43 +68,33 @@ const Home = () => {
         </p>
       </section>
 
-      <section className="flex justify-center">
-        <div className="grid grid-cols-3 w-full gap-6 max-w-7xl">
+      <section className="flex flex-col items-center gap-8">
+        <div className="flex justify-between w-full md:max-w-[34rem] lg:max-w-[42rem] mt-[7rem] mb-[5rem]">
+          <Divider2 className="w-[1.75rem] rotate-270" />
+          <Divider1 className="w-[1.75rem]" />
+          <Divider2 className="w-[1.75rem]" />
+        </div>
+
+        <div className="flex justify-between items-center w-full">
+          <div className="flex items-center gap-8">
+            <p className="heading text-2xl text-nowrap">Minhas postagens</p>
+            <input
+              type="text"
+              placeholder="Buscar..."
+              className="outline-2 outline-primary py-1 px-3.5 rounded-[4px] w-full max-w-80"
+            ></input>
+          </div>
+          <div className="flex items-center gap-4">
+            <p className="font-bold">Categorias:</p>
+            <p className="bg-primary text-bg font-bold rounded-[4px] py-2 px-3">
+              categoria
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full gap-6 max-w-7xl">
           {data?.posts?.map((post) => (
-            <div
-              key={post.id}
-              className="border-[2px] border-primary p-6 rounded-[4px] flex flex-col gap-6 justify-between items-start"
-            >
-              <div className="flex flex-col gap-6">
-                <div className="relative w-full h-56 overflow-hidden">
-                  <Image
-                    aria-hidden
-                    src={post.imageUrl || "/images/no-image.png"}
-                    alt="Imagem da autora do blog, Fernanda Mascheti"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-
-                  {post.category?.name ? (
-                    <p className="bg-primary text-bg text-[0.9rem] py-1.5 min-w-32 z-10 absolute bottom-0 right-0 text-center">
-                      {post.category?.name}
-                    </p>
-                  ) : null}
-                </div>
-
-                <p className="heading text-2xl">
-                  {post.title || "Post sem título"}
-                </p>
-
-                <p className="overflow-hidden line-clamp-3">
-                  {post.content || "Sem descrição"}
-                </p>
-              </div>
-
-              <button type="button" className="heading text-primary">
-                Ler mais
-              </button>
-            </div>
+            <PostCard post={post} key={post.id} />
           ))}
         </div>
       </section>
