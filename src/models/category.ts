@@ -8,7 +8,7 @@ export type CategoryTypes =
   | "inovacao-gestao";
 
 export type CategoryModel = {
-  slug: CategoryTypes[];
+  slug: CategoryTypes;
   name: string;
   description: string;
 };

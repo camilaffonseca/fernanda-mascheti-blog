@@ -13,6 +13,6 @@ export type TagTypes =
   | "data-science";
 
 export type TagModel = {
-  slug: TagTypes[];
+  slug: TagTypes;
   name: string;
 };

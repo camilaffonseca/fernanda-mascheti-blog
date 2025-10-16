@@ -1,10 +1,63 @@
+/** biome-ignore-all lint/a11y/useSemanticElements: Acessibilidade melhor forçando isso dessa forma */
+/** biome-ignore-all lint/a11y/useAriaPropsSupportedByRole: Acessibilidade melhor forçando isso dessa forma */
 "use client";
 
 import Image from "next/image";
+import { useMemo, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+
+import Badge from "@/components/generic/Badge";
+import PaginationButton from "@/components/generic/PaginationButton";
+import PostCard from "@/components/generic/PostCard";
+import Divider1 from "@/components/icons/Divider1";
+import Divider2 from "@/components/icons/Divider2";
+import Email from "@/components/icons/Email";
+import Github from "@/components/icons/Github";
+import Linkedin from "@/components/icons/Linkedin";
+import Search from "@/components/icons/Search";
+import { categories } from "@/constants/categories";
+import type { CategoryTypes } from "@/models/category";
 import { usePosts } from "@/services/hooks/usePosts";
+import { useForm, useWatch } from "react-hook-form";
+import { useDebounce } from "@/hooks/useDebounce";
+
+type SearchForm = {
+  search: string;
+};
 
 const Home = () => {
-  const { data } = usePosts();
+  const [category, setCategory] = useState<CategoryTypes | null>(null);
+  const [page, setPage] = useState<number>(1);
+
+  const { register, control } = useForm<SearchForm>({
+    defaultValues: {
+      search: "",
+    },
+  });
+
+  const search = useWatch({
+    control,
+    name: "search",
+  });
+
+  const debouncedSearch = useDebounce(search);
+
+  const { data: postsResponse, isLoading } = usePosts({
+    limit: 6,
+    page,
+    category,
+
+    // TODO? Não funciona pois não existe documentação da api para enviar a pesquisa
+    search: debouncedSearch,
+  });
+
+  const paginationItems = useMemo(
+    () =>
+      Array.from({
+        length: postsResponse?.pagination?.totalPages || 1,
+      }),
+    [postsResponse?.pagination?.totalPages],
+  );
 
   return (
     <>
@@ -18,18 +71,18 @@ const Home = () => {
         <div
           aria-hidden
           role="presentation"
-          className="absolute top-30 left-40 w-xl h-full rounded-full bg-pink/30 blur-[150px] z-0 pointer-events-none"
+          className="absolute top-30 left-40 w-1/2 h-full rounded-full bg-pink/30 blur-[150px] z-0 pointer-events-none"
         />
         <div
           aria-hidden
           role="presentation"
-          className="absolute bottom-20 right-10 w-xl h-80 rounded-full bg-primary/20 blur-[200px] z-0 pointer-events-none"
+          className="absolute bottom-20 right-10 w-1/2 h-80 rounded-full bg-primary/20 blur-[200px] z-0 pointer-events-none"
         />
 
         <figure className="z-10 text-center flex flex-col items-center">
           <div
             className="relative overflow-hidden rounded-full border-2 border-primary
-             w-[clamp(128px,20vw,224px)] aspect-square z-10"
+             w-[clamp(160px,20vw,224px)] aspect-square z-10"
           >
             <Image
               src="/images/author-image.webp"
@@ -46,7 +99,10 @@ const Home = () => {
           </figcaption>
         </figure>
 
-        <h2 id="section-heading" className="heading text-6xl text-center z-10">
+        <h2
+          id="section-heading"
+          className="heading text-4xl md:text-5xl lg:text-6xl text-center z-10"
+        >
           Eu ensino{" "}
           <span className="bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
             Programação
@@ -61,56 +117,205 @@ const Home = () => {
         </p>
       </section>
 
-      <section className="flex justify-center">
-        <div className="grid grid-cols-3 w-full gap-6 max-w-7xl">
-          {data?.posts?.map((post) => (
-            <div
-              key={post.id}
-              className="border-[2px] border-primary p-6 rounded-[4px] flex flex-col gap-6 justify-between items-start"
-            >
-              <div className="flex flex-col gap-6">
-                <div className="relative w-full h-56 overflow-hidden">
-                  <Image
-                    aria-hidden
-                    src={post.imageUrl || "/images/no-image.png"}
-                    alt="Imagem da autora do blog, Fernanda Mascheti"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-
-                  {post.category?.name ? (
-                    <p className="bg-primary text-bg text-[0.9rem] py-1.5 min-w-32 z-10 absolute bottom-0 right-0 text-center">
-                      {post.category?.name}
-                    </p>
-                  ) : null}
-                </div>
-
-                <p className="heading text-2xl">
-                  {post.title || "Post sem título"}
-                </p>
-
-                <p className="overflow-hidden line-clamp-3">
-                  {post.content || "Sem descrição"}
-                </p>
-              </div>
-
-              <button type="button" className="heading text-primary">
-                Ler mais
-              </button>
-            </div>
-          ))}
+      <section
+        className="flex flex-col items-center gap-8"
+        aria-labelledby="posts-heading"
+      >
+        <div
+          className="flex justify-between w-full md:max-w-[34rem] lg:max-w-[42rem] mt-[7rem] mb-[5rem]"
+          aria-hidden="true"
+        >
+          <Divider2 className="w-[1.75rem] rotate-270" />
+          <Divider1 className="w-[1.75rem]" />
+          <Divider2 className="w-[1.75rem]" />
         </div>
+
+        {/* heading semântico escondido p/ nomear a região; mantém o <p> visual */}
+        <h3 id="posts-heading" className="sr-only">
+          Minhas postagens
+        </h3>
+
+        <div className="flex gap-8 w-full justify-between flex-wrap">
+          <div
+            className="flex items-center gap-8 flex-wrap lg:flex-nowrap"
+            role="search"
+          >
+            <p className="heading text-2xl text-nowrap" aria-hidden="true">
+              Minhas postagens
+            </p>
+
+            <div className="flex flex-nowrap outline-2 outline-primary py-1 px-3.5 rounded-[4px] w-full max-w-80 gap-2">
+              <input
+                type="search"
+                placeholder="Buscar..."
+                aria-label="Buscar postagens"
+                className="outline-0 w-full"
+                {...register("search")}
+              />
+
+              <Search width="1.5rem" />
+            </div>
+          </div>
+
+          <div
+            className="flex items-center gap-4 flex-wrap"
+            aria-labelledby="cats-label"
+          >
+            <p id="cats-label" className="font-bold">
+              Categorias:
+            </p>
+
+            <ul className="flex items-center gap-1 lg:gap-4 flex-wrap">
+              {Object.entries(categories).map(([key, label]) => {
+                const isActive = category === key;
+
+                return (
+                  <li key={key}>
+                    <Badge
+                      isActive={isActive}
+                      label={label}
+                      aria-label={`Filtrar por categoria ${label}`}
+                      onClick={() => {
+                        setPage(1);
+                        setCategory(isActive ? null : (key as CategoryTypes));
+                      }}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+
+        {!postsResponse?.posts?.length && isLoading ? (
+          <ul
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full gap-6 max-w-7xl"
+            aria-live="polite"
+            aria-busy={isLoading ? "true" : "false"}
+          >
+            <Skeleton height="30rem" />
+            <Skeleton height="30rem" />
+            <Skeleton height="30rem" />
+            <Skeleton height="30rem" />
+            <Skeleton height="30rem" />
+            <Skeleton height="30rem" />
+          </ul>
+        ) : null}
+
+        {postsResponse?.posts?.length && !isLoading ? (
+          <ul
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full gap-6 max-w-7xl"
+            aria-live="polite"
+            aria-busy={isLoading ? "true" : "false"}
+          >
+            {postsResponse.posts.map((post) => (
+              <li key={post.id} className="h-full">
+                <PostCard post={post} />
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
+        {!postsResponse?.posts?.length && !isLoading ? (
+          <p role="status" aria-live="polite" className="text-sm opacity-80">
+            Nenhuma postagem encontrada para os filtros atuais.
+          </p>
+        ) : null}
+
+        {postsResponse?.posts?.length && !isLoading ? (
+          <nav
+            className="flex items-center justify-center gap-4 max-w-[48rem]"
+            aria-label="Paginação de postagens"
+          >
+            <ul className="flex items-center gap-2 justify-center flex-wrap">
+              {paginationItems.map((_, pageIndex) => {
+                const pageNumber = pageIndex + 1;
+
+                const isActive = pageNumber === page;
+
+                return (
+                  <li key={`page-${pageNumber}`}>
+                    <PaginationButton
+                      isActive={isActive}
+                      pageNumber={pageNumber}
+                      onClick={() => {
+                        setPage(pageNumber);
+                      }}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        ) : null}
       </section>
 
-      <section className="flex w-full justify-between mt-32">
-        <div className="flex-col gap-3">
-          <p className="heading text-primary">Vamos conversar?</p>
-          <p className="heading text-6xl">Entre em contato</p>
-        </div>
-        <div className="flex-col gap-3">
-          <p>fernandamascheti@gmail.com</p>
-          <p>/Fernanda Mascheti</p>
-          <p>/fernandamascheti</p>
+      <section
+        className="flex w-full justify-between mt-32 flex-wrap max-w-full gap-3"
+        aria-labelledby="contact-title"
+      >
+        <header className="flex-col gap-3">
+          <p
+            className="heading text-primary sm:text-[0.8rem]"
+            id="contact-kicker"
+          >
+            Vamos conversar?
+          </p>
+          <p
+            className="heading lg:text-6xl text-2xl"
+            id="contact-title"
+            role="heading"
+            aria-level={3}
+          >
+            Entre em contato
+          </p>
+        </header>
+
+        <div className="flex flex-col gap-3">
+          <address className="not-italic">
+            <ul className="list-none m-0 p-0">
+              <li>
+                <a
+                  href="mailto:fernandamascheti@gmail.com"
+                  className="flex gap-1.5 items-center"
+                  aria-label="Enviar email para fernandamascheti@gmail.com"
+                >
+                  <Email width="1.2rem" aria-hidden="true" focusable="false" />
+                  <span>fernandamascheti@gmail.com</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/fernandamascheti"
+                  className="flex gap-1.5 items-center"
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                  aria-label="Abrir o LinkedIn de Fernanda Mascheti"
+                >
+                  <Linkedin
+                    width="1.2rem"
+                    aria-hidden="true"
+                    focusable="false"
+                  />
+                  <span>/Fernanda Mascheti</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://github.com/fernandamascheti"
+                  className="flex gap-1.5 items-center"
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                  aria-label="Abrir o GitHub de fernandamascheti"
+                >
+                  <Github width="1.2rem" aria-hidden="true" focusable="false" />
+                  <span>/fernandamascheti</span>
+                </a>
+              </li>
+            </ul>
+          </address>
         </div>
       </section>
     </>

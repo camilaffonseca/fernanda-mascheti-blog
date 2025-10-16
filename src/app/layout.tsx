@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
-import { Chakra_Petch, Inter } from "next/font/google";
+import dynamic from "next/dynamic";
+
+import Footer from "@/components/templates/Footer";
+import Header from "@/components/templates/Header";
+
 import "./globals.css";
+import "react-loading-skeleton/dist/skeleton.css";
+import "react-toastify/dist/ReactToastify.css";
+
+import { Chakra_Petch, Inter } from "next/font/google";
 
 const chakraPetch = Chakra_Petch({
   variable: "--font-chakra-petch",
@@ -20,6 +28,10 @@ export const metadata: Metadata = {
     "Case técnico proposto pela Alura para a função de Desenvolvedor Frontend",
 };
 
+const ToastContainer = dynamic(
+  () => import("@/components/core/ToastContainer"),
+);
+
 const RootLayout = ({
   children,
 }: Readonly<{
@@ -28,31 +40,15 @@ const RootLayout = ({
   return (
     <html lang="pt-BR">
       <body
-        className={`${chakraPetch.variable} ${inter.variable} antialiased py-2 px-6 sm:py-10 sm:px-30`}
+        className={`${chakraPetch.variable} ${inter.variable} antialiased px-4 md:px-8 lg:py-10 lg:px-30`}
       >
-        <header className="flex justify-between py-8 text-2xl heading">
-          <h1 className="uppercase">Fernanda Mascheti</h1>
-
-          <nav aria-label="Menu">
-            <ul className="flex gap-8">
-              <li>
-                <a href="/">Início</a>
-              </li>
-
-              <li>
-                <a href="#blog">Blog</a>
-              </li>
-            </ul>
-          </nav>
-        </header>
+        <Header />
 
         <main>{children}</main>
 
-        <footer>
-          <p className="w-full text-center paragraph mt-16">
-            © Copyright 2025. Produzido por Fernanda Mascheti
-          </p>
-        </footer>
+        <Footer />
+
+        <ToastContainer />
       </body>
     </html>
   );
