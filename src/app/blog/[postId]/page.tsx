@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
-import Skeleton from "react-loading-skeleton";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 import Badge from "@/components/generic/Badge";
 import PostCard from "@/components/generic/PostCard";
@@ -41,8 +41,10 @@ const Post = () => {
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 xl:grid-cols-2 auto-cols-fr gap-6 w-full mt-20">
-        <Skeleton height="30rem" />
-        <Skeleton height="30rem" />
+        <SkeletonTheme baseColor="#6e90b5" highlightColor="#7ba0c7">
+          <Skeleton height="30rem" />
+          <Skeleton height="30rem" />
+        </SkeletonTheme>
       </div>
     );
   }

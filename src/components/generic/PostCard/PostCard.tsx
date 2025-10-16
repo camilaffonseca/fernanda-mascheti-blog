@@ -11,7 +11,7 @@ const PostCard = ({ post }: { post: PostModel }) => {
 
   return (
     <article
-      className="border-[2px] border-primary p-6 rounded-[4px] flex flex-col gap-6 justify-between items-start h-full hover:shadow-[0_4px_44px_0_var(--color-primary-shadow)] transition-shadow duration-300 bg-bg"
+      className="border-[2px] border-primary p-6 rounded-[4px] flex flex-col gap-6 justify-between items-start h-full hover:shadow-[0_4px_44px_0_var(--color-primary-shadow)] transition-shadow duration-300 bg-bg dark:bg-heading"
       itemScope
       itemType="https://schema.org/BlogPosting"
       aria-labelledby={titleId}
@@ -30,7 +30,7 @@ const PostCard = ({ post }: { post: PostModel }) => {
 
           {post.category?.name ? (
             <span
-              className="bg-primary text-bg text-[0.9rem] p-1.5 min-w-32 z-10 absolute bottom-0 right-0 text-center"
+              className="bg-primary text-bg dark:text-heading text-[0.9rem] p-1.5 min-w-32 z-10 absolute bottom-0 right-0 text-center"
               aria-label={`Categoria: ${post.category.name}`}
             >
               {post.category.name}

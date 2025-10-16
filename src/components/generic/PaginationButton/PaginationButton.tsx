@@ -14,8 +14,8 @@ const PaginationButton = ({
 }: PaginationButtonProps) => (
   <button
     type="button"
-    className={`py-2 px-3 text-bg rounded-[4px] ${
-      isActive ? "bg-heading" : "bg-gray"
+    className={`py-2 px-3 text-bg dark:text-heading rounded-[4px] ${
+      isActive ? "bg-heading dark:bg-bg" : "bg-gray"
     }`}
     aria-label={`Ir para página ${pageNumber}`}
     aria-current={isActive ? "page" : undefined}

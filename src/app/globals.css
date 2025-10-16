@@ -11,6 +11,7 @@
   --color-bg: #ffffff;
   --color-heading: #284260;
   --color-paragraph: #6e859f;
+  --color-light-paragraph: #a2bfe0;
 
   --color-pink: #db73ff;
   --color-gray: #9d9d9d;
@@ -18,24 +19,24 @@
 
 @layer components {
   .heading {
-    @apply font-bold font-heading text-heading;
+    @apply font-bold font-heading text-heading dark:text-bg;
   }
 
   .paragraph {
-    @apply font-normal font-paragraph text-paragraph;
+    @apply font-normal font-paragraph text-paragraph dark:text-light-paragraph;
   }
 
   .solid {
-    @apply bg-primary text-bg;
+    @apply bg-primary text-bg dark:text-heading;
   }
 
   .outlined {
-    @apply bg-bg text-primary border-2 border-primary box-border;
+    @apply bg-bg text-primary border-2 border-primary box-border dark:bg-heading;
   }
 }
 
 body {
-  @apply bg-bg text-paragraph;
+  @apply bg-bg text-paragraph dark:bg-heading dark:text-light-paragraph;
 }
 
 .slide-in-right {
