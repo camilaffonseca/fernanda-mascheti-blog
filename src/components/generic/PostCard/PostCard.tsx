@@ -11,7 +11,7 @@ const PostCard = ({ post }: { post: PostModel }) => {
 
   return (
     <article
-      className="border-[2px] border-primary p-6 rounded-[4px] flex flex-col gap-6 justify-between items-start h-full"
+      className="border-[2px] border-primary p-6 rounded-[4px] flex flex-col gap-6 justify-between items-start h-full hover:shadow-[0_4px_44px_0_var(--color-primary-shadow)] transition-shadow duration-300"
       itemScope
       itemType="https://schema.org/BlogPosting"
       aria-labelledby={titleId}
