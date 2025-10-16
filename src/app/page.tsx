@@ -3,8 +3,10 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import Skeleton from "react-loading-skeleton";
+import { toast } from "react-toastify";
 
 import Badge from "@/components/generic/Badge";
 import PaginationButton from "@/components/generic/PaginationButton";
@@ -16,10 +18,9 @@ import Github from "@/components/icons/Github";
 import Linkedin from "@/components/icons/Linkedin";
 import Search from "@/components/icons/Search";
 import { categories } from "@/constants/categories";
+import { useDebounce } from "@/hooks/useDebounce";
 import type { CategoryTypes } from "@/models/category";
 import { usePosts } from "@/services/hooks/usePosts";
-import { useForm, useWatch } from "react-hook-form";
-import { useDebounce } from "@/hooks/useDebounce";
 
 type SearchForm = {
   search: string;
@@ -58,6 +59,16 @@ const Home = () => {
       }),
     [postsResponse?.pagination?.totalPages],
   );
+
+  useEffect(() => {
+    if (!debouncedSearch) {
+      return;
+    }
+
+    toast.info(
+      "Pesquisa não funcional: Não existe documentação de como mandar ela para o backend",
+    );
+  }, [debouncedSearch]);
 
   return (
     <>
