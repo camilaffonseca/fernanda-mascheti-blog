@@ -1,3 +1,4 @@
+import type { CategoryTypes } from "@/models/category";
 import type {
   Metadata,
   Pagination,
@@ -18,7 +19,12 @@ type PostByIdResponse = {
   meta: Omit<Metadata, "category">;
 };
 
-export const getPosts = async (params?: PaginationQueryParams) =>
+export const getPosts = async (
+  params?: PaginationQueryParams & {
+    // TODO? Não funciona pois não existe documentação da api para enviar a pesquisa
+    search?: string;
+  }
+) =>
   api.get<PostsResponse>("/posts", {
     params,
   });
@@ -29,10 +35,14 @@ export const getPostById = async ({ postId }: { postId: string }) =>
 export const getPostsByCategory = async ({
   category,
   params,
+  search,
 }: {
-  category: string;
+  category?: CategoryTypes | null;
   params?: PaginationQueryParams;
+
+  // TODO? Não funciona pois não existe documentação da api para enviar a pesquisa
+  search?: string;
 }) =>
   api.get<PostsResponse>(`/posts/category/${category}`, {
-    params,
+    params: { ...params, search },
   });
