@@ -12,6 +12,7 @@
   --color-paragraph: #6e859f;
 
   --color-pink: #db73ff;
+  --color-gray: #9d9d9d;
 }
 
 @layer components {
@@ -34,4 +35,67 @@
 
 body {
   @apply bg-bg text-paragraph;
+}
+
+.slide-in-right {
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.075, 0.82, 0.165, 1)
+    both;
+  animation: slide-in-right 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) both;
+}
+
+.fade-out {
+  -webkit-animation: fade-out 300ms ease-out both;
+  animation: fade-out 300ms ease-out both;
+}
+
+/**
+ * ----------------------------------------
+ * animation slide-in-right
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/**
+ * ----------------------------------------
+ * animation fade-out
+ * ----------------------------------------
+ */
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
