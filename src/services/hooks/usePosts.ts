@@ -8,12 +8,12 @@ export const usePosts = (
   params?: PaginationQueryParams,
   options: SWRConfiguration = {
     revalidateOnFocus: false,
-  }
+  },
 ) => {
   const { data, isLoading, error } = useSWR(
     ["posts", params],
     async () => getPosts(params),
-    options
+    options,
   );
 
   return {
