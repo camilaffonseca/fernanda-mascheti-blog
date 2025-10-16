@@ -54,12 +54,12 @@ const Post = () => {
         <div
           aria-hidden
           role="presentation"
-          className="absolute top-10 left-40 w-1/2 h-full rounded-full bg-pink/20 blur-[150px] z-0 pointer-events-none"
+          className="absolute top-10 left-90 w-1/2 h-full rounded-full bg-pink/24 blur-[150px] z-0 pointer-events-none"
         />
         <div
           aria-hidden
           role="presentation"
-          className="absolute bottom-20 right-10 w-1/2 h-80 rounded-full bg-primary/20 blur-[200px] z-0 pointer-events-none"
+          className="absolute bottom-20 right-0 w-1/2 h-80 rounded-full bg-primary/19 blur-[200px] z-0 pointer-events-none"
         />
 
         <div className="grid grid-cols-1 xl:grid-cols-2 auto-cols-fr gap-6 w-full mt-20">
@@ -139,7 +139,7 @@ const Post = () => {
           />
           <p className="heading text-2xl my-10">Postagens relacionadas</p>
 
-          <div className="w-full flex justify-center">
+          <div className="relative w-full flex justify-center">
             <ul
               className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full gap-6 max-w-7xl"
               aria-live="polite"

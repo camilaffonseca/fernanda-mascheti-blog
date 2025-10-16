@@ -82,12 +82,12 @@ const Home = () => {
         <div
           aria-hidden
           role="presentation"
-          className="absolute top-30 left-40 w-1/2 h-full rounded-full bg-pink/30 blur-[150px] z-0 pointer-events-none"
+          className="absolute top-10 left-90 w-1/2 h-full rounded-full bg-pink/24 blur-[150px] z-0 pointer-events-none"
         />
         <div
           aria-hidden
           role="presentation"
-          className="absolute bottom-20 right-10 w-1/2 h-80 rounded-full bg-primary/20 blur-[200px] z-0 pointer-events-none"
+          className="absolute bottom-20 right-0 w-1/2 h-80 rounded-full bg-primary/19 blur-[200px] z-0 pointer-events-none"
         />
 
         <figure className="z-10 text-center flex flex-col items-center">
@@ -265,7 +265,7 @@ const Home = () => {
         className="flex w-full justify-between mt-32 flex-wrap max-w-full gap-3"
         aria-labelledby="contact-title"
       >
-        <header className="flex-col gap-3">
+        <header className="flex flex-col gap-3">
           <p
             className="heading text-primary sm:text-[0.8rem]"
             id="contact-kicker"
@@ -284,7 +284,7 @@ const Home = () => {
 
         <div className="flex flex-col gap-3">
           <address className="not-italic">
-            <ul className="list-none m-0 p-0">
+            <ul className="list-none m-0 p-0 flex flex-col gap-3">
               <li>
                 <a
                   href="mailto:fernandamascheti@gmail.com"
@@ -309,7 +309,7 @@ const Home = () => {
                     aria-hidden="true"
                     focusable="false"
                   />
-                  <span>/Fernanda Mascheti</span>
+                  <span className="underline">/Fernanda Mascheti</span>
                 </a>
               </li>
 
@@ -322,7 +322,7 @@ const Home = () => {
                   aria-label="Abrir o GitHub de fernandamascheti"
                 >
                   <Github width="1.2rem" aria-hidden="true" focusable="false" />
-                  <span>/fernandamascheti</span>
+                  <span className="underline">/fernandamascheti</span>
                 </a>
               </li>
             </ul>
