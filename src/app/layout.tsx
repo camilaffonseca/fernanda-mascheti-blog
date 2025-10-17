@@ -40,7 +40,7 @@ const RootLayout = ({
   return (
     <html lang="pt-BR">
       <body
-        className={`${chakraPetch.variable} ${inter.variable} antialiased px-4 md:px-8 lg:py-10 lg:px-30`}
+        className={`${chakraPetch.variable} ${inter.variable} antialiased px-4 pb-10 md:px-8 lg:py-10 lg:px-30 overflow-x-hidden`}
       >
         <Header />
 
