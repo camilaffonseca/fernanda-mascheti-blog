@@ -31,6 +31,10 @@ Durante o desenvolvimento, foi utilizado um bypass via extensão de navegador.
 
 API: hook usePosts `search`. Só falta o backend aceitar.
 
+### Layout dos cards de Posts
+
+Em telas muito grandes, expandir os cards dos posts até as laterais causava distorções visuais. Por isso, defini um limite de largura centralizado. No tamanho do protótipo do Figma, o layout permanece idêntico ao original.
+
 ### Roadmap
 
 - Definir query de busca no backend.
