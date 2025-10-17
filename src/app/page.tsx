@@ -82,12 +82,12 @@ const Home = () => {
         <div
           aria-hidden
           role="presentation"
-          className="absolute top-10 left-90 w-1/2 h-full rounded-full bg-pink/24 blur-[150px] z-0 pointer-events-none"
+          className="absolute top-10 left-30 md:left-90 w-1/2 h-full rounded-full bg-pink/24 blur-[150px] z-0 pointer-events-none"
         />
         <div
           aria-hidden
           role="presentation"
-          className="absolute bottom-20 right-0 w-1/2 h-80 rounded-full bg-primary/19 blur-[200px] z-0 pointer-events-none"
+          className="absolute bottom-20 right-0 w-1/2 h-80 rounded-full bg-primary/30 blur-[200px] z-0 pointer-events-none"
         />
 
         <figure className="z-10 text-center flex flex-col items-center">
@@ -155,7 +155,7 @@ const Home = () => {
               Minhas postagens
             </p>
 
-            <div className="flex flex-nowrap outline-2 outline-primary py-1 px-3.5 rounded-[4px] w-full max-w-80 gap-2">
+            <div className="flex flex-nowrap outline-2 outline-primary py-1 px-3.5 rounded-[4px] w-full sm:max-w-80 gap-2">
               <input
                 type="search"
                 placeholder="Buscar..."
